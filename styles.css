@@ -1,0 +1,130 @@
+/* Statyczne, ciemne tło strony */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #0f172a; /* Elegancki, bardzo ciemny granat/szarość */
+  color: #fff;
+}
+
+/* Nowoczesny kontener dopasowany do statycznego tła */
+.game-container {
+  background: linear-gradient(145deg, #1e293b, #0f172a);
+  padding: 35px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+  text-align: center;
+}
+
+h1 {
+  margin-top: 0;
+  font-size: 28px;
+  color: #e2e8f0;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Plansza */
+#board {
+  display: grid;
+  gap: 3px;
+  background-color: #0b0f19;
+  padding: 8px;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  user-select: none;
+  box-shadow: inset 0 0 15px rgba(0,0,0,0.8);
+}
+
+/* Zamknięte kafelki */
+.cell {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #475569, #334155);
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 800;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+.cell:hover:not(.revealed) {
+  background: linear-gradient(135deg, #64748b, #475569);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0,0,0,0.4);
+}
+
+.cell:active:not(.revealed):not(.flag) {
+  transform: translateY(1px);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+/* Odkryte kafelki - teraz z gradientowym tłem */
+.cell.revealed {
+  background: linear-gradient(145deg, #1e293b, #0f172a);
+  box-shadow: inset 0 3px 8px rgba(0,0,0,0.7);
+  cursor: default;
+  transform: none;
+  border: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+/* Bomba */
+.cell.mine {
+  background: linear-gradient(145deg, #ef4444, #b91c1c);
+  animation: explode 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Kolory cyfr dopasowane pod ciemne tło */
+.cell[data-num="1"] { color: #38bdf8; text-shadow: 0 0 5px rgba(56,189,248,0.3); }
+.cell[data-num="2"] { color: #4ade80; text-shadow: 0 0 5px rgba(74,222,128,0.3); }
+.cell[data-num="3"] { color: #f87171; text-shadow: 0 0 5px rgba(248,113,113,0.3); }
+.cell[data-num="4"] { color: #c084fc; text-shadow: 0 0 5px rgba(192,132,252,0.3); }
+.cell[data-num="5"] { color: #facc15; text-shadow: 0 0 5px rgba(250,204,21,0.3); }
+.cell[data-num="6"] { color: #2dd4bf; text-shadow: 0 0 5px rgba(45,212,191,0.3); }
+.cell[data-num="7"] { color: #fb923c; text-shadow: 0 0 5px rgba(251,146,60,0.3); }
+.cell[data-num="8"] { color: #cbd5e1; text-shadow: 0 0 5px rgba(203,213,225,0.3); }
+
+/* Przycisk resetu */
+#resetBtn {
+  padding: 12px 28px;
+  font-size: 1rem;
+  font-weight: bold;
+  background: linear-gradient(135deg, #0ea5e9, #0369a1);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 0 auto;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+#resetBtn:hover {
+  background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+}
+
+#resetBtn:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+}
+
+/* Animacja eksplozji miny */
+@keyframes explode {
+  0% { transform: scale(0.5); background-color: #facc15; }
+  50% { transform: scale(1.2); background-color: #fb923c; box-shadow: 0 0 20px #ef4444; }
+  100% { transform: scale(1); background-color: #ef4444; }
+}
